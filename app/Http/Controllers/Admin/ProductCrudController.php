@@ -26,16 +26,14 @@ class ProductCrudController extends CrudController
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
         $this->crud->removeFields(['quantity']);
         $this->crud->removeColumns(['quantity']);
-        $this->crud->addField(
-            [
-               'label' => "Category",
-               'type' => 'select2',
-               'name' => 'category_id',
-               'entity' => 'category',
-               'attribute' => 'name',
-               'model' => "App\Models\Category"
-            ]
-        );
+        $this->crud->addField([
+           'label' => "Category",
+           'type' => 'select2',
+           'name' => 'category_id',
+           'entity' => 'category',
+           'attribute' => 'name',
+           'model' => "App\Models\Category"
+        ]);
         $this->crud->addColumn([
             'type' => "select",
             'name' => 'category_id',
