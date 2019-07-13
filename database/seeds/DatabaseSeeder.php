@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(MonarreAdminSeeder::class);
+        $this->call(CategoryTableSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

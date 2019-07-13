@@ -93,6 +93,11 @@ class ProductionCrudController extends CrudController
            'attribute' => 'name',
            'model' => "App\Models\Product"
         ]);
+        $this->crud->addField([
+           'label' => "Product Name",
+           'type' => 'product_show',
+           'name' => 'product.show',
+        ]);
     }
 
     public function store(StoreRequest $request)
