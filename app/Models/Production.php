@@ -22,7 +22,6 @@ class Production extends Model
         'person',
         'description',
         'product_id'
-
     ];
 
     public function product()
