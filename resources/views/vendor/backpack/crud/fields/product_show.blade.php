@@ -36,12 +36,23 @@
         $(document).ready(function () {
             var product = $('select[name="product_id"]');
             var produtShow = $('#monarre-product');
+            getProduct();
             product.on('change', function () {
-                produtShow.val('Searching for Product..');
-                $.get(`{{ route('product.index') }}/${product.children("option:selected").val()}`, function( data ) {
-                    produtShow.val(data.name);
-                });
+                getProduct();
             });
+
+            function getProduct() {
+              $.ajax({
+                url: `{{ route('product.index') }}/${product.children("option:selected").val()}`,
+                headers: {
+                  'Authorization': `Bearer {{ backpack_user()->api_token }}`,
+                  'Accept': 'application/json',
+                },
+                success: function (data) {
+                  produtShow.val(data.name);
+                },
+              });
+            }
         });
     </script>
 @endsection
