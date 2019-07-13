@@ -15,13 +15,5 @@ class CategoryTableSeeder extends Seeder
         Category::create([
         	'name' => 'Admin'
         ]);
-
-        Role::create([
-        	'name' => 'Customer'
-        ]);
-
-        Role::create([
-        	'name' => 'Direktur Operasional'
-        ]);
     }
 }
