@@ -38,6 +38,7 @@ class ProductCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'type' => "select",
+            'id' => 'product',
             'name' => 'category_id',
             'entity' => 'category',
             'attribute' => "name",
