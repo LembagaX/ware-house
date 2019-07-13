@@ -13,15 +13,27 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-        	'name' => 'Admin'
+        	'name' => 'Biscuit'
         ]);
 
-        Role::create([
-        	'name' => 'Customer'
+        Category::create([
+        	'name' => 'Cookies'
         ]);
 
-        Role::create([
-        	'name' => 'Direktur Operasional'
+        Category::create([
+        	'name' => 'Chocolate'
+        ]);
+
+        Category::create([
+        	'name' => 'Candy'
+        ]);
+
+        Category::create([
+        	'name' => 'Nuts'
+        ]);
+
+        Category::create([
+        	'name' => 'Snack'
         ]);
     }
 }

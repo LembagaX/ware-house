@@ -37,6 +37,7 @@ class ProductionRequest extends FormRequest
              'gas' => 'required|min:1',
              'person' => 'required|min:1',
              'description' => 'required',
+             'product_id' => 'required',
         ];
     }
 

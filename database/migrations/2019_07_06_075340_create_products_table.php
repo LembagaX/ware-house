@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->string('code', 6)->unique();
             $table->string('name', 72);
             $table->smallInteger('quantity')->unsigned()->default(0);
-            $table->integer('price')->unsigned();
+            $table->integer('price')->unsigned()-> nullable();
             $table->timestamps();
         });
     }

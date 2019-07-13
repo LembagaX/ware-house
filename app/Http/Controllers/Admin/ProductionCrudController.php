@@ -35,6 +35,10 @@ class ProductionCrudController extends CrudController
                'allows_null' => true,
         ]);
         $this->crud->addField([
+           'name' => 'person',
+           'label' => 'Orang',
+        ]);
+        $this->crud->addField([
            'name' => 'finish',
            'label' => 'Jam Selesai',
            'type' => 'datetime_picker',
