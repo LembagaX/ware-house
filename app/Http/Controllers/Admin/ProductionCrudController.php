@@ -25,16 +25,67 @@ class ProductionCrudController extends CrudController
            'model' => "App\Models\Product"
         ]);
         $this->crud->addField([
+           'name' => 'start',
+           'label' => 'Jam Mulai',
+           'type' => 'datetime_picker',
+               'datetime_picker_options' => [
+                   'format' => 'HH:mm',
+                   'language' => 'en'
+               ],
+               'allows_null' => true,
+        ]);
+        $this->crud->addField([
+           'name' => 'finish',
+           'label' => 'Jam Selesai',
+           'type' => 'datetime_picker',
+               'datetime_picker_options' => [
+                   'format' => 'HH:mm',
+                   'language' => 'en'
+               ],
+               'allows_null' => true,
+        ]);
+        $this->crud->addField([
+            'name' => 'divisi',
+            'type' => 'select2_from_array',
+            'options' => [
+                '1' => 'Bollmill',
+                '2' => 'Oven Tunnel',
+                '3' => 'Coating',
+                '4' => 'Boiler',
+                '5' => 'Permen',
+              ],
+            'allows_null' => false,
+            'default' => 1,
+        ]);
+        $this->crud->addField([
             'name' => 'shift',
             'type' => 'select2_from_array',
             'options' => [
                 1 => '1',
-                2 => '2',
-                3 => '3'
-            ],
+                2 => '2'
+              ],
             'allows_null' => false,
             'default' => 1,
         ]);
+        $this->crud->addField([
+            'name' => 'machine',
+            'label' => 'Mesin',
+            'type' => 'select2_from_array',
+            'options' => [
+                '1' => 'Vertikal',
+                '2' => 'Horizontal'
+              ],
+            'allows_null' => false,
+            'default' => 'Vertikal',
+        ]);
+        $this->crud->addColumn([
+           'type' => 'select',
+           'name' => 'product_id',
+           'entity' => 'product',
+           'attribute' => 'name',
+           'model' => "App\Models\Product"
+        ]);
+        
         $this->crud->addColumn([
            'type' => 'select',
            'name' => 'product_id',

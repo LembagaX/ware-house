@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'code' => 'unique:products,code|required|min:1|max:6',
             'name' => 'required|min:5|max:72',
             'quantity' => 'unique:products,quantity|max:65535',
-            'price' => 'unique:products,price|required|min:1|max:4294967295',
+            'price' => 'unique:products,price|max:4294967295',
         ];
     }
 

@@ -10,7 +10,17 @@ class Production extends Model
     use CrudTrait;
     protected $table = 'productions';
     protected $fillable = [
+        'divisi',
         'shift',
+        'machine',
+        'start',
+        'finish',
+        'batch',
+        'wip',
+        'bs',
+        'gas',
+        'person',
+        'description',
         'product_id'
     ];
 
