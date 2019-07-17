@@ -14,7 +14,7 @@ class AddProductIdToProductions extends Migration
     public function up()
     {
         Schema::table('productions', function (Blueprint $table) {
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_id')->after('id');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

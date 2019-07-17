@@ -28,7 +28,6 @@ class ProductionRequest extends FormRequest
         return [
              'divisi' => 'required|min:1',
              'shift' => 'required|min:1',
-             'machine' => 'required|min:1',
              'start' => 'required|min:1',
              'finish' => 'required|min:1',
              'batch' => 'required|min:1',

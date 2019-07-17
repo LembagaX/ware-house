@@ -28,6 +28,7 @@ class ProductCrudController extends CrudController
         $this->crud->removeColumns(['quantity']);
         $this->crud->removeFields(['price']);
         $this->crud->removeColumns(['price']);
+        $this->crud->enableExportButtons();
         $this->crud->addField([
            'label' => "Category",
            'type' => 'select2',
@@ -38,6 +39,7 @@ class ProductCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'type' => "select",
+            'id' => 'product',
             'name' => 'category_id',
             'entity' => 'category',
             'attribute' => "name",

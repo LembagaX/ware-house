@@ -12,7 +12,6 @@ class Production extends Model
     protected $fillable = [
         'divisi',
         'shift',
-        'machine',
         'start',
         'finish',
         'batch',

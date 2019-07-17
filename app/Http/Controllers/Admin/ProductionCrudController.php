@@ -14,40 +14,10 @@ class ProductionCrudController extends CrudController
         $this->crud->setModel('App\Models\Production');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/production');
         $this->crud->setEntityNameStrings('production', 'productions');
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-        $this->crud->addField([
-           'type' => 'select2',
-           'name' => 'product_id',
-           'entity' => 'product',
-           'attribute' => 'name',
-           'model' => "App\Models\Product"
-        ]);
-        $this->crud->addField([
-           'name' => 'start',
-           'label' => 'Jam Mulai',
-           'type' => 'datetime_picker',
-               'datetime_picker_options' => [
-                   'format' => 'HH:mm',
-                   'language' => 'en'
-               ],
-               'allows_null' => true,
-        ]);
-        $this->crud->addField([
-           'name' => 'person',
-           'label' => 'Orang',
-        ]);
-        $this->crud->addField([
-           'name' => 'finish',
-           'label' => 'Jam Selesai',
-           'type' => 'datetime_picker',
-               'datetime_picker_options' => [
-                   'format' => 'HH:mm',
-                   'language' => 'en'
-               ],
-               'allows_null' => true,
-        ]);
+        $this->crud->enableExportButtons();
         $this->crud->addField([
             'name' => 'divisi',
             'type' => 'select2_from_array',
@@ -72,15 +42,66 @@ class ProductionCrudController extends CrudController
             'default' => 1,
         ]);
         $this->crud->addField([
-            'name' => 'machine',
-            'label' => 'Mesin',
-            'type' => 'select2_from_array',
-            'options' => [
-                '1' => 'Vertikal',
-                '2' => 'Horizontal'
-              ],
-            'allows_null' => false,
-            'default' => 'Vertikal',
+           'name' => 'start',
+           'label' => 'Jam Mulai',
+           'type' => 'datetime_picker',
+               'datetime_picker_options' => [
+                   'format' => 'HH:mm',
+                   'language' => 'en'
+               ],
+               'allows_null' => true,
+        ]);
+        $this->crud->addField([
+           'name' => 'finish',
+           'label' => 'Jam Selesai',
+           'type' => 'datetime_picker',
+               'datetime_picker_options' => [
+                   'format' => 'HH:mm',
+                   'language' => 'en'
+               ],
+               'allows_null' => true,
+        ]);
+        $this->crud->addField([
+           'type' => 'select2',
+           'name' => 'product_id',
+           'label' => 'Kode Produk',
+           'entity' => 'product',
+           'attribute' => 'name',
+           'model' => "App\Models\Product"
+        ]);
+        $this->crud->addField([
+           'label' => "Nama Produk",
+           'type' => 'product_show',
+           'name' => 'product.show',
+        ]);
+        $this->crud->addField([
+           'name' => 'batch',
+           'label' => 'Batch /Kg',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'wip',
+           'label' => 'WIP /Kg',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'bs',
+           'label' => 'BS /Kg',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'gas',
+           'label' => 'Gas /Kg',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'person',
+           'label' => 'Orang',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'description',
+           'label' => 'Keterangan',
         ]);
         $this->crud->addColumn([
            'type' => 'select',

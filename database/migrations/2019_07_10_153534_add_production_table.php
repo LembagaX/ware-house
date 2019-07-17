@@ -15,15 +15,14 @@ class AddProductionTable extends Migration
     {
         Schema::create('productions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('divisi', ['Bollmill', 'Oven Tunnel', 'Coating', 'Boiler', 'Permen']);
             $table->enum('shift', ['1', '2']);
-            $table->enum('machine',['Vertikal', 'Horizontal']);
+            $table->enum('divisi', ['Bollmill', 'Oven Tunnel', 'Coating', 'Boiler', 'Permen']);
             $table->time('start');
             $table->time('finish');
             $table->tinyInteger('batch')->unsigned();
-            $table->float('wip');
-            $table->float('bs');
-            $table->float('gas');
+            $table->float('wip')->unsigned();
+            $table->float('bs')->unsigned();
+            $table->float('gas')->unsigned();
             $table->tinyInteger('person')->unsigned();
             $table->text('description');
             $table->timestamps();
