@@ -12,6 +12,7 @@
 */
 
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function() {
+	CRUD::resource('user', 'UserCrudController');
 	CRUD::resource('product', 'ProductCrudController');
 	CRUD::resource('category', 'CategoryCrudController');
 });
