@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProductIdToProductions extends Migration
+class SetRelasiProductIdToPacking extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddProductIdToProductions extends Migration
      */
     public function up()
     {
-        Schema::table('productions', function (Blueprint $table) {
+        Schema::table('packings', function (Blueprint $table) {
             $table->unsignedInteger('product_id')->after('id');
             $table->foreign('product_id')->references('id')->on('products');
         });
@@ -26,7 +26,7 @@ class AddProductIdToProductions extends Migration
      */
     public function down()
     {
-        Schema::table('productions', function (Blueprint $table) {
+        Schema::table('packings', function (Blueprint $table) {
             $table->dropForeign(['product_id']);
             $table->dropColumn('product_id');
         });

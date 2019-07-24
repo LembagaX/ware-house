@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProductionTable extends Migration
+class CreatePackingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class AddProductionTable extends Migration
      */
     public function up()
     {
-        Schema::create('productions', function (Blueprint $table) {
+        Schema::create('packings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('shift', ['1', '2']);
-            $table->enum('divisi', ['Bollmill', 'Oven Tunnel', 'Coating', 'Boiler', 'Permen']);
+            $table->enum('machine', ['Manual', 'Horizontal', 'Vertikal']);
             $table->time('start');
             $table->time('finish');
-            $table->tinyInteger('batch')->unsigned();
-            $table->float('wip');
-            $table->float('bs');
-            $table->float('bsrate', 5, 2);
-            $table->float('gas');
+            $table->tinyInteger('carton')->unsigned();
             $table->tinyInteger('person')->unsigned();
             $table->text('description');
             $table->timestamps();
@@ -37,6 +33,6 @@ class AddProductionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productions');
+        Schema::dropIfExists('packings');
     }
 }

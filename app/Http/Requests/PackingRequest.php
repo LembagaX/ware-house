@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductionRequest extends FormRequest
+class PackingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,18 +26,13 @@ class ProductionRequest extends FormRequest
     public function rules()
     {
         return [
-             // 'date' => 'required',
-             'divisi' => 'required|min:1',
-             'shift' => 'required|min:1',
-             'start' => 'required|min:1',
-             'finish' => 'required|min:1',
-             'batch' => 'required|min:1',
-             'wip' => 'required',
-             'bs' => 'required|min:1',
-             'gas' => 'required|min:1',
-             'person' => 'required|min:1',
-             'description' => 'required',
-             'good_id' => 'required',
+            'shift' => 'required',
+            'machine' => 'required',
+            'start' => 'required',
+            'finish' => 'required',
+            'cartoon' => 'required',
+            'person' => 'required',
+            'description' => 'required',
         ];
     }
 

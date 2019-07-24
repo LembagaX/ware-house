@@ -16,6 +16,7 @@ use Backpack\CRUD\CrudPanel;
  */
 class ProductCrudController extends CrudController
 {
+
     public function setup()
     {
         $this->crud->setModel('App\Models\Product');

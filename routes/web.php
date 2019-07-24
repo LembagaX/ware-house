@@ -12,6 +12,8 @@
 */
 
 Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function() {
+	CRUD::resource('packing', 'PackingCrudController');
+	CRUD::resource('good', 'GoodCrudController');
 	CRUD::resource('production', 'ProductionCrudController');
 	CRUD::resource('user', 'UserCrudController');
 	CRUD::resource('product', 'ProductCrudController');

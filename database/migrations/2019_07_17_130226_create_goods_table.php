@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateGoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,10 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('code', 7)->unique();
+        Schema::create('goods', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('no',12)->unique();
             $table->string('name', 72);
-            $table->smallInteger('quantity')->unsigned()->default(0);
-            $table->integer('price')->unsigned()-> nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('goods');
     }
 }
