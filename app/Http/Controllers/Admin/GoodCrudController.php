@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\GoodRequest as StoreRequest;
 use App\Http\Requests\GoodRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
@@ -18,6 +17,10 @@ class GoodCrudController extends CrudController
 {
     public function setup()
     {
+        if (backpack_user()->hasRole(\App\Role::ADMIN)) {
+        } else {
+            return abort(403);
+        }
         $this->crud->setModel('App\Models\Good');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/good');
         $this->crud->setEntityNameStrings('good', 'goods');

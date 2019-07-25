@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\PackingRequest as StoreRequest;
 use App\Http\Requests\PackingRequest as UpdateRequest;
@@ -11,6 +12,10 @@ class PackingCrudController extends CrudController
 {
     public function setup()
     {
+        if (backpack_user()->hasRole(\App\Role::PACKING) or backpack_user()->hasRole(\App\Role::ADMIN)) {
+        } else {
+            return abort(403);
+        }
         $this->crud->setModel('App\Models\Packing');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/packing');
         $this->crud->setEntityNameStrings('packing', 'packings');

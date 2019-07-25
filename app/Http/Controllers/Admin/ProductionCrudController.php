@@ -88,7 +88,7 @@ class ProductionCrudController extends CrudController
         ]);
         $this->crud->addField([
            'name' => 'batch',
-           'label' => 'Batch /Kg',
+           'label' => 'Batch',
            'type' => 'number',
         ]);
         $this->crud->addField([
@@ -163,7 +163,7 @@ class ProductionCrudController extends CrudController
         ]);
         $this->crud->addColumn([
            'name' => 'batch',
-           'label' => 'Batch /Kg',
+           'label' => 'Batch',
            'type' => 'number',
         ]);
         $this->crud->addColumn([
@@ -175,6 +175,12 @@ class ProductionCrudController extends CrudController
         $this->crud->addColumn([
            'name' => 'bs',
            'label' => 'BS /Kg',
+           'type' => 'number',
+           'decimals' => 2,
+        ]);
+        $this->crud->addColumn([
+           'name' => 'bsrate',
+           'label' => '% BS',
            'type' => 'number',
            'decimals' => 2,
         ]);
