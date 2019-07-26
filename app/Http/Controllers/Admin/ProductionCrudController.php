@@ -24,6 +24,17 @@ class ProductionCrudController extends CrudController
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
         $this->crud->enableExportButtons();
+        // $this->crud->addFilter([ // daterange filter
+        //    'type' => 'date_range',
+        //    'name' => 'created_at',
+        //    'label'=> 'Date range'
+        //  ],
+        //  false,
+        //  function($value) { // if the filter is active, apply these constraints
+        //    // $dates = json_decode($value);
+        //    // $this->crud->addClause('where', 'date', '>=', $dates->from);
+        //    // $this->crud->addClause('where', 'date', '<=', $dates->to);
+        //  });
         $this->crud->addField([
            'name' => 'created_at',
            'label' => 'Tanggal Hari Ini',

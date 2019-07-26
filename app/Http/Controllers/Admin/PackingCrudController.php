@@ -23,7 +23,7 @@ class PackingCrudController extends CrudController
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
         $this->crud->addField([
-           'name' => 'date',
+           'name' => 'created_at',
            'label' => 'Tanggal Hari Ini',
            'type' => 'date_picker',
                'datetime_picker_options' => [
@@ -108,12 +108,9 @@ class PackingCrudController extends CrudController
            'label' => 'Keterangan',
         ]);
         $this->crud->addColumn([
-            'name' => 'date',
+            'name' => 'created_at',
             'label' => 'Tanggal Hari Ini',
-            'type' => 'date_picker',
-            'options' => [       
-                   'format' => 'D MMM YYYY',
-              ],
+            'type' => 'text'
         ]);
         $this->crud->addColumn([
             'name' => 'shift',

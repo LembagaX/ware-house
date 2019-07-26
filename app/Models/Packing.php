@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Carbon\Carbon;
 
 class Packing extends Model
 {
@@ -24,5 +25,10 @@ class Packing extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('j F Y');
     }
 }
