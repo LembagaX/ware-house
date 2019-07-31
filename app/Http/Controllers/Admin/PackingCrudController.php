@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
+use Backpack\CRUD\CrudPanel;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\PackingRequest as StoreRequest;
 use App\Http\Requests\PackingRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
 
 class PackingCrudController extends CrudController
 {

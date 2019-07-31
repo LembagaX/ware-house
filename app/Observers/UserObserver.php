@@ -12,6 +12,5 @@ class UserObserver
 	{
 		$user->api_token = Str::random(60);
         $user->role_id = Role::ADMIN;
-        $user->role_id = Role::PRODUCTION;
     }
 }
