@@ -85,12 +85,7 @@ class PackingCrudController extends CrudController
         $this->crud->addField([
            'name' => 'finish',
            'label' => 'Jam Selesai',
-           'type' => 'datetime_picker',
-               'datetime_picker_options' => [
-                   'format' => 'HH:mm',
-                   'language' => 'en'
-               ],
-               'allows_null' => true,
+           'type' => 'datetime_picker'
         ]);
         $this->crud->addField([
            'name' => 'carton',

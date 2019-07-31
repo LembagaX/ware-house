@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Hash;
 use Auth;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\UserRequest as StoreRequest;
@@ -46,6 +47,7 @@ class UserCrudController extends CrudController
 
     public function store(StoreRequest $request)
     {
+        $request->request->set('password', Hash::make($request->password));
         $redirect_location = parent::storeCrud($request);
         return $redirect_location;
     }
