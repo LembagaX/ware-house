@@ -26,17 +26,18 @@ class ProductionRequest extends FormRequest
     public function rules()
     {
         return [
+             // 'date' => 'required',
              'divisi' => 'required|min:1',
              'shift' => 'required|min:1',
-             'machine' => 'required|min:1',
              'start' => 'required|min:1',
              'finish' => 'required|min:1',
              'batch' => 'required|min:1',
-             'wip' => 'required|min:1',
+             'wip' => 'required',
              'bs' => 'required|min:1',
              'gas' => 'required|min:1',
              'person' => 'required|min:1',
              'description' => 'required',
+             'good_id' => 'required',
         ];
     }
 

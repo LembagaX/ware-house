@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\ProductRequest as StoreRequest;
 use App\Http\Requests\ProductRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
@@ -16,8 +15,13 @@ use Backpack\CRUD\CrudPanel;
  */
 class ProductCrudController extends CrudController
 {
+
     public function setup()
     {
+        if (backpack_user()->hasRole(\App\Role::FINANCE) or backpack_user()->hasRole(\App\Role::ADMIN)) {
+        } else {
+            return abort(403);
+        }
         $this->crud->setModel('App\Models\Product');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/product');
         $this->crud->setEntityNameStrings('product', 'products');
@@ -28,6 +32,7 @@ class ProductCrudController extends CrudController
         $this->crud->removeColumns(['quantity']);
         $this->crud->removeFields(['price']);
         $this->crud->removeColumns(['price']);
+        $this->crud->enableExportButtons();
         $this->crud->addField([
            'label' => "Category",
            'type' => 'select2',

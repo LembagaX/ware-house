@@ -12,7 +12,10 @@ class User extends Model
 
     protected $table = 'users';
     protected $fillable = [
-        'email', 'role_id', 'password', 'name'
+        'name',
+        'email', 
+        'password', 
+        'role_id' 
     ];
 
     public function role()

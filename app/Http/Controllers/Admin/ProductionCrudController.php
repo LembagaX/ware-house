@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Backpack\CRUD\CrudPanel;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\ProductionRequest as StoreRequest;
@@ -11,18 +12,70 @@ class ProductionCrudController extends CrudController
 {
     public function setup()
     {
+        if (backpack_user()->hasRole(\App\Role::PRODUCTION) or backpack_user()->hasRole(\App\Role::ADMIN)) {
+        } else {
+            return abort(403);
+        }
+
         $this->crud->setModel('App\Models\Production');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/production');
         $this->crud->setEntityNameStrings('production', 'productions');
-        $this->crud->setFromDb();
+        // $this->crud->setFromDb();
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+        $this->crud->enableExportButtons();
+        // $this->crud->addFilter([ // daterange filter
+        //    'type' => 'date_range',
+        //    'name' => 'created_at',
+        //    'label'=> 'Date range'
+        //  ],
+        //  false,
+        //  function($value) { // if the filter is active, apply these constraints
+        //    // $dates = json_decode($value);
+        //    // $this->crud->addClause('where', 'date', '>=', $dates->from);
+        //    // $this->crud->addClause('where', 'date', '<=', $dates->to);
+        //  });
         $this->crud->addField([
+           'name' => 'created_at',
+           'label' => 'Tanggal Hari Ini',
+           'type' => 'date_picker',
+               'datetime_picker_options' => [
+                   'todayBtn' => true,
+                   'format' => 'D MMM YYYY',
+                   'language' => 'en'
+               ],
+               'allows_null' => true,
+        ]);
+        $this->crud->addField([
+            'name' => 'divisi',
+            'type' => 'select2_from_array',
+            'options' => [
+                '1' => 'Bollmill',
+                '2' => 'Oven Tunnel',
+                '3' => 'Coating',
+                '4' => 'Boiler',
+                '5' => 'Permen',
+              ],
+            'allows_null' => false,
+            'default' => 2,
+        ]);
+        $this->crud->addField([
+            'name' => 'shift',
+            'type' => 'select2_from_array',
+            'options' => [
+                1 => '1',
+                2 => '2'
+              ],
+            'allows_null' => false,
+            'default' => 1,
+        ]);
+        $this->crud->addField([
+           'label' => "WIP",
            'type' => 'select2',
-           'name' => 'product_id',
-           'entity' => 'product',
+           'name' => 'good_id',
+           'entity' => 'good',
            'attribute' => 'name',
-           'model' => "App\Models\Product"
+           'model' => "App\Models\Good"
         ]);
         $this->crud->addField([
            'name' => 'start',
@@ -45,6 +98,43 @@ class ProductionCrudController extends CrudController
                'allows_null' => true,
         ]);
         $this->crud->addField([
+           'name' => 'batch',
+           'label' => 'Batch',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'wip',
+           'label' => 'WIP /Kg',
+           'type' => 'number',
+           'attributes' => ["step" => "any"], // allow decimals
+        ]);
+        $this->crud->addField([
+           'name' => 'bs',
+           'label' => 'BS /Kg',
+           'type' => 'number',
+           'attributes' => ["step" => "any"], // allow decimals
+        ]);
+        $this->crud->addField([
+           'name' => 'gas',
+           'label' => 'Gas /Kg',
+           'type' => 'number',
+           'attributes' => ["step" => "any"], // allow decimals
+        ]);
+        $this->crud->addField([
+           'name' => 'person',
+           'label' => 'Jumlah Orang',
+           'type' => 'number',
+        ]);
+        $this->crud->addField([
+           'name' => 'description',
+           'label' => 'Keterangan',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'created_at',
+            'label' => 'Tanggal Hari Ini',
+            'type' => 'text'
+        ]);
+        $this->crud->addColumn([
             'name' => 'divisi',
             'type' => 'select2_from_array',
             'options' => [
@@ -54,49 +144,71 @@ class ProductionCrudController extends CrudController
                 '4' => 'Boiler',
                 '5' => 'Permen',
               ],
-            'allows_null' => false,
-            'default' => 1,
         ]);
-        $this->crud->addField([
+        $this->crud->addColumn([
             'name' => 'shift',
             'type' => 'select2_from_array',
             'options' => [
                 1 => '1',
                 2 => '2'
               ],
-            'allows_null' => false,
-            'default' => 1,
-        ]);
-        $this->crud->addField([
-            'name' => 'machine',
-            'label' => 'Mesin',
-            'type' => 'select2_from_array',
-            'options' => [
-                '1' => 'Vertikal',
-                '2' => 'Horizontal'
-              ],
-            'allows_null' => false,
-            'default' => 'Vertikal',
         ]);
         $this->crud->addColumn([
-           'type' => 'select',
-           'name' => 'product_id',
-           'entity' => 'product',
-           'attribute' => 'name',
-           'model' => "App\Models\Product"
+            'type' => "select",
+            'id' => 'good',
+            'name' => 'good_id',
+            'entity' => 'good',
+            'attribute' => "name",
+            'label' => 'WIP Product',
+            'model' => "App\Models\Good",
         ]);
-        
         $this->crud->addColumn([
-           'type' => 'select',
-           'name' => 'product_id',
-           'entity' => 'product',
-           'attribute' => 'name',
-           'model' => "App\Models\Product"
+           'name' => 'start',
+           'label' => 'Jam Mulai',
+           'type' => 'datetime_picker',
         ]);
-        $this->crud->addField([
-           'label' => "Product Name",
-           'type' => 'product_show',
-           'name' => 'product.show',
+        $this->crud->addColumn([
+           'name' => 'finish',
+           'label' => 'Jam Selesai',
+           'type' => 'datetime_picker',
+        ]);
+        $this->crud->addColumn([
+           'name' => 'batch',
+           'label' => 'Batch',
+           'type' => 'number',
+        ]);
+        $this->crud->addColumn([
+           'name' => 'wip',
+           'label' => 'WIP /Kg',
+           'type' => 'number',
+           'decimals' => 2,
+        ]);
+        $this->crud->addColumn([
+           'name' => 'bs',
+           'label' => 'BS /Kg',
+           'type' => 'number',
+           'decimals' => 2,
+        ]);
+        $this->crud->addColumn([
+           'name' => 'bsrate',
+           'label' => '% BS',
+           'type' => 'number',
+           'decimals' => 2,
+        ]);
+        $this->crud->addColumn([
+           'name' => 'gas',
+           'label' => 'Gas /Kg',
+           'type' => 'number',
+           'decimals' => 2,
+        ]);
+        $this->crud->addColumn([
+           'name' => 'person',
+           'label' => 'Jumlah Orang',
+           'type' => 'number',
+        ]);
+        $this->crud->addColumn([
+           'name' => 'description',
+           'label' => 'Keterangan',
         ]);
     }
 

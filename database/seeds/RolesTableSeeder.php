@@ -13,6 +13,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+
     	$role = new Role;
     	$role->id = Role::ADMIN;
     	$role->name = 'Admin';

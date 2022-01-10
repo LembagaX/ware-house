@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Carbon\Carbon;
 
 class Production extends Model
 {
@@ -12,7 +13,6 @@ class Production extends Model
     protected $fillable = [
         'divisi',
         'shift',
-        'machine',
         'start',
         'finish',
         'batch',
@@ -21,11 +21,17 @@ class Production extends Model
         'gas',
         'person',
         'description',
-        'product_id'
+        'good_id',
+        'created_at'
     ];
 
-    public function product()
+    public function good()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Good::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('j F Y');
     }
 }

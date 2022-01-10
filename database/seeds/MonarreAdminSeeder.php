@@ -15,7 +15,13 @@ class MonarreAdminSeeder extends Seeder
         BackpackUser::create([
             'name' => 'Admin Monarre',
             'email' => 'admin@monarre.com',
-            'password' => bcrypt('monarre'),
+            'password' => bcrypt('123MONARRE456'),
+        ]);
+
+        BackpackUser::create([
+            'name' => 'Produksi Monarre',
+            'email' => 'produksi@monarre.com',
+            'password' => bcrypt('123456'),
         ]);
     }
 }
